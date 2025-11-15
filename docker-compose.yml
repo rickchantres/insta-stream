@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  insta-stream:
+    build: .
+    container_name: insta-stream-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./stream:/app/stream
+    environment:
+      - PORT=3000
+      - UPLOAD_DIR=/app/uploads
+      - STREAM_DIR=/app/stream
+      - HLS_SEGMENT_DURATION=2
+      - MAX_UPLOAD_SIZE=500
+    restart: unless-stopped
